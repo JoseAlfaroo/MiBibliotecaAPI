@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LibraryWebAPI.Models
 {
@@ -12,9 +13,12 @@ namespace LibraryWebAPI.Models
         public string? NombresAutor { get; set; }
         [Required]
         public string? ApellidosAutor { get; set; }
+        
+        // Puede ser NULL para permitir autores sin pais, tanto para listado como para registro y actualización
+        public int? PaisID { get; set; }
 
         //Relacion con pais
-        public int? PaisID { get; set; }
+        [JsonIgnore]
         public Pais? Pais { get; set; }
     }
 }
