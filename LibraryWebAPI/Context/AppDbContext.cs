@@ -13,5 +13,21 @@ namespace LibraryWebAPI.Context
         public DbSet<Libro> Libros { get; set; }
         public DbSet<GeneroLibro> GenerosLibro { get; set; }
         public DbSet<AutorLibro> AutoresLibro { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configurando Clave Compuesta LIBRO-GENERO
+            modelBuilder.Entity<GeneroLibro>()
+                .HasKey(gl => new { gl.LibroID, gl.GeneroID });
+
+            // Configurando Clave Compuesta AUTOR-GENERO
+            modelBuilder.Entity<AutorLibro>()
+                .HasKey(al => new { al.LibroID, al.AutorID });
+
+        }
+
     }
 }

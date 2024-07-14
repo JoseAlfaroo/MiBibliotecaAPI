@@ -23,7 +23,11 @@ namespace LibraryWebAPI.Controllers
         {
             try
             {
-                var libros = await _context.Libros.ToListAsync();
+                var libros = await _context.Libros
+                    .Include(l => l.GenerosLibro).ThenInclude(gl => gl.Genero)
+                    .Include(l => l.AutoresLibro).ThenInclude(al => al.Autor)
+                    .ToListAsync();
+
                 return Ok(libros);
             }
             catch (Exception ex)
@@ -38,7 +42,10 @@ namespace LibraryWebAPI.Controllers
         {
             try
             {
-                var libro = await _context.Libros.FindAsync(id);
+                var libro = await _context.Libros
+                    .Include(l => l.GenerosLibro).ThenInclude(gl => gl.Genero)
+                    .Include(l => l.AutoresLibro).ThenInclude(al => al.Autor)
+                    .FirstOrDefaultAsync(l => l.LibroID == id);
 
                 if (libro == null)
                 {
@@ -131,5 +138,8 @@ namespace LibraryWebAPI.Controllers
                 return StatusCode(500, new { message = ex.ToString() });
             }
         }
+
+
+        
     }
 }

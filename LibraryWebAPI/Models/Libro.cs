@@ -14,5 +14,11 @@ namespace LibraryWebAPI.Models
         public int? AñoPublicacion { get; set; }
         public string? Portada { get; set; }
         public string? Descripcion { get; set; }
+
+        // Relacion muchos a muchos con Genero mediante GeneroLibro
+        public ICollection<GeneroLibro>? GenerosLibro { get; set; }
+
+        // Relacion muchos a muchos con Autor mediante AutorLibro
+        public ICollection<AutorLibro>? AutoresLibro { get; set; }
     }
 }
