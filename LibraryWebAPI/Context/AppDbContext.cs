@@ -23,7 +23,7 @@ namespace LibraryWebAPI.Context
             modelBuilder.Entity<GeneroLibro>()
                 .HasKey(gl => new { gl.LibroID, gl.GeneroID });
 
-            // Configurando Clave Compuesta AUTOR-GENERO
+            // Configurando Clave Compuesta LIBRO-AUTOR
             modelBuilder.Entity<AutorLibro>()
                 .HasKey(al => new { al.LibroID, al.AutorID });
 
